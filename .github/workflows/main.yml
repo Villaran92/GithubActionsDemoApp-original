@@ -12,6 +12,8 @@ on:
 jobs:
     builds:
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
         env:
             proyecto: GithubActionsDemoApp/GithubActionsDemoApp.csproj
             
@@ -41,3 +43,13 @@ jobs:
               with:
                 path: ./miapp
                 name: build
+
+            - name: Desplegando zip
+              run: zip -r miapp.zip ./miapp
+
+            - name: Relase
+              uses: softprops/action-gh-release@v2.0.9
+              with:
+                files: ./miapp.zip
+                body: "Release de la aplicación"
+                tag_name: ${{ github.ref_name }} 
