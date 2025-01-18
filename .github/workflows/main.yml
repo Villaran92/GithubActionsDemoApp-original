@@ -8,6 +8,7 @@ on:
       - 'Pruebas/**'
     branches:
       - main
+
 jobs:
     builds:
         runs-on: ubuntu-latest
@@ -25,3 +26,6 @@ jobs:
               
             - name: Compilando
               run: dotnet build --no-restore
+
+            - name: Ejecutando pruebas
+              run: dotnet test --no-build
